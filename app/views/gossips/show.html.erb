@@ -1,4 +1,12 @@
-<h1><%=@gossips.title%></h1>
+<div class="card border-info text-center m-5">
+
+  <div class="card-header">
+    <p class="text-right text-muted">
+    </p>
+
+    <h1><i class="far fa-newspaper"></i> <u><%=@gossips.title%></u> </h1>
+  </div>
+</div>
 
 <p>Auteur : <%= link_to "#{@gossips.user.first_name} #{@gossips.user.last_name}", author_path(@gossips.user.id)%></p>
 <p>Cree le <%=@gossips.created_at%></p>

@@ -1,12 +1,24 @@
-<h1>A propos de <%= @user.first_name%> <%= @user.last_name%></h1>
-<p>De <%= @user.city.name%></p>
-<p>Contact : <%= @user.email%></p>
-<p><%= @user.age%> ans</p>
+<div class="card border-body m-5">
+  <div class="card-header text-center">
+
+    <h1>A propos de <%= @user.first_name%> <%= @user.last_name%></h1>
+  </div>
+  <div class="card-body text-primary">
+    <ul class="card-text list-group">
+      <li class="list-group-item">De <%= @user.city.name%></li>
+      <li class="list-group-item">Contact : <%= @user.email%></li>
+      <li class="list-group-item"><%= @user.age%> ans</li>
+    </ul>
+	</div>
+	<div class="card-body text-center">
+		<%= @user.description%>
+	</div>
+</div>
 </br>
-<p><%= @user.description%></p>
+
 
 </br>
-<h2>Ses Gossips</h2>
+<h2>Les Gossips de <%= @user.first_name%></h2>
 <div>
     <% @gossips.each do |gossip| %>
         <p><%= link_to "#{gossip.title.capitalize}", gossip_path(gossip.id) %></p>

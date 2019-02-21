@@ -3,4 +3,5 @@ class PrivateMessage < ApplicationRecord
   has_many :multi_private_messages
   has_many :users, through: :multi_private_messages
   has_many :recipients, through: :multi_private_messages
+  validates :content, presence: true
 end

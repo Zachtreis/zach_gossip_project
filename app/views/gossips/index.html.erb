@@ -1,7 +1,8 @@
 <h1>The Gossip Project</h1>
 <p>Bienvenue sur The Gossip Project</p>
 
-<p>Voici la liste des Gossips</p>
+<%= link_to "Cree un nouveau Gossip", new_gossip_path, class: "btn btn-success" %>
+<h2>Voici la liste des Gossips</h2>
 
 <div class="row justify-content-around">
     <% @gossips.each do |gossip| %>
@@ -11,7 +12,7 @@
             <h4 class="card-title"><%= link_to "#{gossip.title.capitalize}", gossip_path(gossip.id) %></h4>
             <p class="card-text"><small class="text-muted">Likes: <%= gossip.likes.count %></small></p>
             <h5 class="card-subtitle text-muted"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h5></br>
-            <%= link_to "A propos de l'auteur", author_path(gossip.user.id), class: "btn btn-success" %>
+            <%= link_to "A propos de l'auteur", author_path(gossip.user.id), class: "btn-sm btn-success" %>
         </div>
         </div>
     <% end %>
