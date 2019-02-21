@@ -1,0 +1,18 @@
+<h1>The Gossip Project</h1>
+<p>Bienvenue sur The Gossip Project</p>
+
+<p>Voici la liste des Gossips</p>
+
+<div class="row justify-content-around">
+    <% @gossips.each do |gossip| %>
+        <div class="card border-primary bg-light mb-3 w-25 mx-5">
+        <div class="card-body">
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+            <h4 class="card-title"><%= link_to "#{gossip.title.capitalize}", gossip_path(gossip.id) %></h4>
+            <p class="card-text"><small class="text-muted">Likes: <%= gossip.likes.count %></small></p>
+            <h5 class="card-subtitle text-muted"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h5></br>
+            <%= link_to "A propos de l'auteur", author_path(gossip.user.id), class: "btn btn-success" %>
+        </div>
+        </div>
+    <% end %>
+</div>

@@ -1,0 +1,15 @@
+<h1>A propos de <%= @user.first_name%> <%= @user.last_name%></h1>
+<p>De <%= @user.city.name%></p>
+<p>Contact : <%= @user.email%></p>
+<p><%= @user.age%> ans</p>
+</br>
+<p><%= @user.description%></p>
+
+</br>
+<h2>Ses Gossips</h2>
+<div>
+    <% @gossips.each do |gossip| %>
+        <p><%= link_to "#{gossip.title.capitalize}", gossip_path(gossip.id) %></p>
+    <% end %>
+</div>
+
