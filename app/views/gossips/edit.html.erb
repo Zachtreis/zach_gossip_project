@@ -1,15 +1,15 @@
 <div class="card border-body m-5">
   <div class="card-header">
-  	<h1>Ajouter un potin</h1>
-	</div>
-	<%= form_tag url_for(action: 'create'), method: "post" do %>
+  	<h1>Editer mon potin</h1>
+    </div>
+    <%= form_tag url_for(action: 'update'), method: "patch" do %>
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 		<div class="card-body text-body">
 			<div class="form-group">
-			<%= text_field_tag 'title', @gossip.title, class: "form-control", placeholder: "Le titre de ton potin" %>
-			<%= text_area_tag 'content', @gossip.content, class: "form-control", placeholder: "Ton potin" %>
+			<h5><u>Titre</u> :<%= text_field_tag 'new_title', @gossip.title, class: "form-control", placeholder: @gossip.title %></h5>
+			<h5><u>Potin</u> :<%= text_area_tag 'new_content', @gossip.content, class: "form-control", placeholder: @gossip.content %></h5>
 			<br/> <br/>
-			<%= submit_tag "Ajouter mon potin", class: "btn btn-body" %>
+			<%= submit_tag "Editer mon potin", class: "btn btn-body" %>
 			<% end %>
     	</div>
     </div>
@@ -20,7 +20,7 @@
   <div class="alert alert-danger" role="alert">
     <h4 class="alert-heading">Sorry!</h4>
     <p>
-      <p>We couldn't create your gossip for the following reason(s):</p>
+      <p>We couldn't edit your gossip for the following reason(s):</p>
         <ul>
           <% @gossip.errors.full_messages.each do |message| %>
             <li><%= message %></li>

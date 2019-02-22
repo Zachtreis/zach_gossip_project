@@ -1,13 +1,37 @@
-<div class="card border-info text-center m-5">
+<% if flash.now[:notice] %>
+<div class="alert alert-success">
+  <div class="notice">
+    <h5 class="text-body"><%= flash.now[:notice] %></h5>
+    <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<% end %>
+
+<div class="card border-body text-center m-5">
 
   <div class="card-header">
     <p class="text-right text-muted">
+      <i class="fas fa-edit"></i> <%= link_to "Éditer le potin", edit_gossip_path(params[:id]) %>
+      <i class="fas fa-trash-alt"></i> <%= link_to "Supprimer le potin", gossip_path(params[:id]), type: "submit", method: "delete", data: { confirm: "Do you really, though?" } %>
     </p>
 
-    <h1><i class="far fa-newspaper"></i> <u><%=@gossips.title%></u> </h1>
+    <h1><i class="far"></i> <u><%=@gossips.title%></u> </h1>
+  </div>
+
+  <div class="card-body text-body">
+    <blockquote class="blockquote text-dark"><i><%= @gossips.content%></i></blockquote> 
+    <div class="card-title text-left">Auteur : <%= link_to "#{@gossips.user.first_name} #{@gossips.user.last_name}", author_path(@gossips.user.id)%> (<%=@gossips.user.city.name%>)</div>
+    <div class="card-title text-left">Cree le <%=@gossips.created_at%></div>
+    
   </div>
 </div>
 
-<p>Auteur : <%= link_to "#{@gossips.user.first_name} #{@gossips.user.last_name}", author_path(@gossips.user.id)%></p>
-<p>Cree le <%=@gossips.created_at%></p>
-<p><%= @gossips.content%></p>
+
+<!-- 
+EXAMPLES DE BOUTONS
+<a href="<%= gossip_path(params[:id]) %>" class="btn btn-primary">Lire le potin</a>
+<a href="<%= edit_gossip_path(params[:id]) %>" class="btn btn-default">Editer</a>
+<a href="<%= gossip_path(params[:id]) %>" class="btn btn-danger" data-confirm="Are you sure?">Supprimer</a>
+-->

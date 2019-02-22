@@ -1,9 +1,24 @@
-<h1>The Gossip Project</h1>
-<p>Bienvenue sur The Gossip Project</p>
+<% if flash.now[:notice] %>
+<div class="alert alert-success">
+  <div class="notice">
+    <h5 class="text-body"><%= flash.now[:notice] %></h5>
+    <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<% end %>
 
-<%= link_to "Cree un nouveau Gossip", new_gossip_path, class: "btn btn-success" %>
+<div class="row justify-content-around">
+	<h1>Bienvenue sur The Gossip Project</h1>
+</div>
+	</br>
+	<div class="row justify-content-around"><%= link_to "Cree un nouveau Gossip", new_gossip_path, class: "btn-lg btn-success" %></div>
+
+
+</br></br></br></br>
 <h2>Voici la liste des Gossips</h2>
-
+</br>
 <div class="row justify-content-around">
     <% @gossips.each do |gossip| %>
         <div class="card border-primary bg-light mb-3 w-25 mx-5">
@@ -12,8 +27,14 @@
             <h4 class="card-title"><%= link_to "#{gossip.title.capitalize}", gossip_path(gossip.id) %></h4>
             <p class="card-text"><small class="text-muted">Likes: <%= gossip.likes.count %></small></p>
             <h5 class="card-subtitle text-muted"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h5></br>
-            <%= link_to "A propos de l'auteur", author_path(gossip.user.id), class: "btn-sm btn-success" %>
-        </div>
+						<%= link_to "A propos de l'auteur", author_path(gossip.user.id), class: "btn-sm btn-success" %>
+						<!-- EXAMPLES DE BOUTONS
+						<a href="<%= '#{gossip_path(gossip.id)}' %>" class="btn btn-primary btn-sm">Lire le potin</a>
+						<a href="<%= '#{edit_gossip_path(gossip.id)}' %>" class="btn btn-default btn-sm">Editer</a>
+						<a href="<%= '#{gossip_path(gossip.id)}' %>" class="btn btn-danger btn-sm" data-confirm="Are you sure?" data-method="DELETE>Supprimer</a>
+						-->     
+				</div>
         </div>
     <% end %>
 </div>
+
