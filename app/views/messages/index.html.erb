@@ -1,0 +1,45 @@
+<% if @over_ten %>
+ <%= link_to 'Show Previous', '?m=all' %>
+<% end %>
+
+<div class="card border-body mx-auto mt-5 mb-3" style="width: 400px;">
+  <div class="card-header"><h4>Messages échangés</h4></div>
+  <div class="card-body text-body text-right">
+    <% @messages.each do |message| %>
+      <% if message.content %>
+      <% user = User.find(message.user_id) %>
+          <% if user != current_user %>
+            <div class="text-left border border-body rounded p-2 m-1">
+              <em><small><strong><%= user.first_name %></strong> : <%= message.message_time %></small></em><br>
+              <%= message.content %>
+            </div>
+          <% else %>
+            <div class="text-muted border border-light rounded p-2 m-1">
+              <em><small><strong><%= user.first_name %></strong> : <%= message.message_time %></small></em><br>
+              <%= message.content %>
+            </div>
+          <% end %>
+        <% end %>
+    <% end %>
+
+    <%= form_tag(conversation_messages_path(params[:conversation_id]), method: :create) do %>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <div class=" form-group card-body text-body">
+        <%= text_area_tag 'content', @message.content, class: "form-control-plaintext col-sm-10", placeholder: "Ton message" %>
+        <br/> <br/>
+        <%= submit_tag "Ajouter mon commentaire", class: "btn btn-body" %>
+        <% end %>
+    </div>
+  </div>
+ 
+<!--
+<%= form_for [@conversation, @message]  do |f| %>
+    <div class="form-group card-body text-body">
+        <%= f.text_area :content, class: "form-control", placeholder: 'Ton message' %>
+        <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+        <%= f.submit "Envoyer", class: "btn btn-body" %>
+    </div>
+  </div>
+<% end %>
+</div>
+-->

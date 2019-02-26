@@ -1,0 +1,91 @@
+<div class="card border-body m-5">
+  <div class="card-header text-center">
+  <% if current_user == @user || session[:user_id] == 91 %>
+    <p class="text-right text-muted">
+      <i class="fas fa-edit"></i> <%= link_to "Éditer", edit_user_path(params[:id]) %>&nbsp;&nbsp;
+    </p>
+  <% end %>
+  <h1>A propos de <%= @user.first_name%> <%= @user.last_name%></h1>
+  </div>
+  <div class="card-body text-primary">
+    <ul class="card-text list-group">
+      <li class="list-group-item">De <u><%= link_to "#{@user.city.name}", city_path(@user.city.id)%></u></li>
+      <li class="list-group-item">Contact : <%= @user.email%></li>
+      <li class="list-group-item"><%= @user.age%> ans</li>
+    </ul>
+	</div>
+	<div class="card-body text-center">
+		<%= @user.description%>
+	</div>
+</div>
+</br>
+
+
+<!--
+</br>
+<h2>Les Gossips de <%= @user.first_name%></h2>
+<div>
+    <% @gossips.each do |gossip| %>
+        <p><%= link_to "#{gossip.title.capitalize}", gossip_path(gossip.id) %></p>
+    <% end %>
+</div>
+-->
+
+<!-- affichage des potins -->
+<h2 class="text-left mb-5"><i class="far fa-newspaper"></i> Les Potins de <%= @user.first_name %> </h2>
+<div class="card-columns border-body container">
+  <% @user.gossips.each do |gossip| %>
+    <div class="card">
+      <div class="card-header pb-1 d-flex">
+        <h5 class="card-title"><%= gossip.title %></h5>
+        <div class="ml-auto">
+          <span class="badge badge-secondary"><i class="fas fa-comments"></i> <%= gossip.comments.count %></span>
+          <span class="badge badge-secondary"><i class="fas fa-heart"></i> <%= gossip.likes.count %></span>
+        </div>
+      </div>
+      <div class="card-body text-center">
+        <h6 class="card-subtitle mb-2 text-muted">" <%= gossip.content %> "</h6>
+        <%= link_to "Voir le Gossip", gossip_path(gossip.id),:class => "btn-body btn p-1"%>
+      </div>
+    </div>
+  <% end %>
+</div>
+</br></br>
+
+
+<!-- affichage des potins likés-->
+<% if @user.likes.count > 0 %>
+  <h2 class="text-left mb-5"><i class="fas fa-heart"></i> Les Potins likés par Zacharie</h2>
+  <div class="card-columns border-body container">
+    <% @user.likes.each do |like| %>
+      <div class="card">
+        <div class="card-header pb-1 d-flex">
+          <h5 class="card-title"><%= like.gossip.title %></h5>
+          <div class="ml-auto">
+            <span class="badge badge-secondary"><i class="fas fa-comments"></i> <%= like.gossip.comments.count %></span>
+            <span class="badge badge-secondary"><i class="fas fa-heart"></i> <%= like.gossip.likes.count %></span>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h6 class="card-subtitle mb-2 text-muted">" <%= like.gossip.content %> "</h6>
+          <%= link_to "Voir le Gossip", gossip_path(like.gossip.id),:class => "btn-body btn p-1"%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+</br></br>
+<!-- affichage des commentaires-->
+<% if @user.comments.count > 0 %>
+  <h2 class="text-left mb-5"><i class="far fa-comments"></i> Les Commentaires de <%= @user.first_name %> </h2>
+  <div class="card-columns border-body container">
+    <% @user.comments.each do |comment| %>
+      <div class="card">
+        <div class="card-body text-center">
+          <h6 class="card-subtitle mb-2 text-muted">" <%= comment.content %> "</h6>
+          <%= link_to "Voir le Gossip", gossip_comment_path(comment.id),:class => "btn-body btn p-1"%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

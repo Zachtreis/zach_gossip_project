@@ -1,28 +1,27 @@
 <div class="card border-body m-5">
   <div class="card-header">
-  	<h1>Editer mon potin</h1>
+  	<h1>Editer mon commentaire</h1>
     </div>
     <%= form_tag url_for(action: 'update'), method: "patch" do %>
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 		<div class="card-body text-body">
 			<div class="form-group">
-			<h5><u>Titre</u> :<%= text_field_tag 'title', @gossip.title, class: "form-control", placeholder: @gossip.title %></h5>
-			<h5><u>Potin</u> :<%= text_area_tag 'content', @gossip.content, class: "form-control", placeholder: @gossip.content %></h5>
+			<h5><u>Commentaire</u> :<%= text_area_tag 'content', @comment.content, class: "form-control", placeholder: @comment.content %></h5>
 			<br/> <br/>
-			<%= submit_tag "Editer mon potin", class: "btn btn-body" %>
+			<%= submit_tag "Editer mon commentaire", class: "btn btn-body" %>
 			<% end %>
     	</div>
     </div>
 </div>
 
-<% if @gossip.errors.any? %>
+<% if @comment.errors.any? %>
 </br>
   <div class="alert alert-danger" role="alert">
     <h4 class="alert-heading">Sorry!</h4>
     <p>
-      <p>We couldn't edit your gossip for the following reason(s):</p>
+      <p>We couldn't edit your comment for the following reason(s):</p>
         <ul>
-          <% @gossip.errors.full_messages.each do |message| %>
+          <% @comment.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
         </ul>

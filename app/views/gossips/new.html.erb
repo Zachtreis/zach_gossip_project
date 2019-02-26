@@ -8,6 +8,7 @@
 			<div class="form-group">
 			<%= text_field_tag 'title', @gossip.title, class: "form-control", placeholder: "Le titre de ton potin" %>
 			<%= text_area_tag 'content', @gossip.content, class: "form-control", placeholder: "Ton potin" %>
+	
 			<br/> <br/>
 			<%= submit_tag "Ajouter mon potin", class: "btn btn-body" %>
 			<% end %>

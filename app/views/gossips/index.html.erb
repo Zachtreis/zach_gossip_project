@@ -9,25 +9,28 @@
 </div>
 <% end %>
 
-<div class="row justify-content-around">
-	<h1>Bienvenue sur The Gossip Project</h1>
-</div>
-	</br>
-	<div class="row justify-content-around"><%= link_to "Cree un nouveau Gossip", new_gossip_path, class: "btn-lg btn-success" %></div>
-
+	<div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Bienvenue sur The Gossip Project</h1>
+          <p>Tu veux en savoir plus sur tes petits camarades ou tu as des informations croustillantes a partager ? Ne cherches pas plus loin, ton aventure touche a sa fin !</p>
+          <p><%= link_to "Cree un nouveau Gossip", new_gossip_path, class: "btn-lg btn-success" %></p>
+        </div>
+      </div>
 
 </br></br></br></br>
 <h2>Voici la liste des Gossips</h2>
 </br>
+
 <div class="row justify-content-around">
     <% @gossips.each do |gossip| %>
         <div class="card border-primary bg-light mb-3 w-25 mx-5">
         <div class="card-body">
                 <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
             <h4 class="card-title"><%= link_to "#{gossip.title.capitalize}", gossip_path(gossip.id) %></h4>
-            <p class="card-text"><small class="text-muted">Likes: <%= gossip.likes.count %></small></p>
+						<p class="card-text"><small class="text-muted">Likes: <%= gossip.likes.count %></small> &nbsp;&nbsp; <small class="text-muted">Comments: <%= gossip.comments.count %></small></p>
+
             <h5 class="card-subtitle text-muted"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h5></br>
-						<%= link_to "A propos de l'auteur", author_path(gossip.user.id), class: "btn-sm btn-success" %>
+						<%= link_to "A propos de l'auteur", user_path(gossip.user.id), class: "btn-sm btn-success" %>
 						<!-- EXAMPLES DE BOUTONS
 						<a href="<%= '#{gossip_path(gossip.id)}' %>" class="btn btn-primary btn-sm">Lire le potin</a>
 						<a href="<%= '#{edit_gossip_path(gossip.id)}' %>" class="btn btn-default btn-sm">Editer</a>
@@ -38,3 +41,28 @@
     <% end %>
 </div>
 
+<!-- EXAMPLES DE LISTES
+</br>
+<ul class="list-group">
+<% @gossips.each do |gossip| %>
+	<li class="list-group-item"><%= link_to "#{gossip.title.capitalize}", gossip_path(gossip.id) %></li>
+	<% end %>
+	</ul>
+
+
+	<% @gossips.each do |gossip| %>
+	<div class="row">
+	<div class="col-sm-3">
+		<div class="well">
+		 <p><%= gossip.user.first_name %> <%= gossip.user.last_name %></p>
+		 <img src="https://o.aolcdn.com/images/dims3/GLOB/crop/630x315+0+0/resize/630x315!/format/jpg/quality/85/http%3A%2F%2Fo.aolcdn.com%2Fhss%2Fstorage%2Fmidas%2Fefe897c49141c93a0c5cd105ebc390fd%2F205192450%2Favatar.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+		</div>
+	</div>
+	<div class="col-sm-9">
+		<div class="well">
+			<p><%= link_to "#{gossip.title.capitalize}", gossip_path(gossip.id) %></p>
+		</div>
+	</div>
+</div>
+<% end %>
+-->
